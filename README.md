@@ -2,4 +2,6 @@
     <img src="presentation/present-logo.jpg" alt="Simple tests logo" width="260">
 </div>
 
-# simple-tests-on-react
+# Simple Test
+
+Simple tests on React Framework
