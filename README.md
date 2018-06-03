@@ -3,9 +3,6 @@
 </div>
 
 
-
-
-
 # Simple Tests
 
 [![Build Status](https://travis-ci.org/razrabotal/simple-tests-on-react.svg?branch=master)](https://travis-ci.org/razrabotal/simple-tests-on-react)
@@ -36,6 +33,8 @@ Add div emelent
 ```
 
 ## Example
+Live demo: [https://codepen.io/razrabotal/pen/dKGPWR](codepen.io/razrabotal/pen/dKGPWR)
+
 ```html
 <div id="root">
 ## Hello, world
@@ -60,4 +59,6 @@ What is your name?
 </div>
 ```
 
-Live demo: [https://codepen.io/razrabotal/pen/dKGPWR](codepen.io/razrabotal/pen/dKGPWR)
+![alt text](https://taras.top/share/tests/example.jpg "Example test")
+
+
