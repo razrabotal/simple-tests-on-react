@@ -8,7 +8,7 @@
 [![Build Status](https://travis-ci.org/razrabotal/simple-tests-on-react.svg?branch=master)](https://travis-ci.org/razrabotal/simple-tests-on-react)
 [![dependencies Status](https://david-dm.org/razrabotal/simple-tests-on-react/status.svg)](https://david-dm.org/razrabotal/simple-tests-on-react)
 
-It is a React-app that adds awesome test to any web-page. 
+This is a React-app that adds awesome test to any web-page. 
 
 ## Install
 
@@ -25,10 +25,34 @@ Add two lines to your code.
 <script src="https://taras.top/share/tests/script.js"></script>
 ```
 
-Add div emelent
+Add div emelent.
 ```html
 <div id="root">
-    Your test
+</div>
+```
+
+Write your test.
+```html
+<div id="root">
+    ## Test title
+    # Test Description
+    
+    First question
+    - False answer - Comment after select
+    - False answer - Comment after select
+    + True answer - Comment after select
+    
+    Second question
+    https://yoursite.com/images/question-image.jpg
+    - False answer 
+    + True answer - Comment after select
+    - False answer
+    
+    ...
+    
+    Number points - Comment
+    Number points - Commnet
+    Number points - Comment   
 </div>
 ```
 
