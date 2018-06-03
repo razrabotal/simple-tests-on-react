@@ -14,6 +14,8 @@ This is a React-app that adds awesome test to any web-page.
 ## Install
 
 ```bash
+git clone https://github.com/razrabotal/simple-tests-on-react.git
+cd simple-tests-on-react/
 yarn
 yarn start
 ```
