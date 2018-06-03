@@ -57,7 +57,7 @@ Write your test.
 ```
 
 ## Example
-Live demo: [codepen.io/razrabotal/pen/dKGPWR](https://codepen.io/razrabotal/pen/dKGPWRx)
+Live demo: [https://codepen.io/razrabotal/pen/dKGPWR](https://codepen.io/razrabotal/pen/dKGPWR)
 
 ```html
 <div id="root">
