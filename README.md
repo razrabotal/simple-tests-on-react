@@ -2,12 +2,14 @@
     <img src="presentation/present-logo.jpg" alt="Simple tests logo" width="260">
 </div>
 
-<center>
-[![Build Status](https://travis-ci.org/razrabotal/simple-tests-on-react.svg?branch=master)](https://travis-ci.org/razrabotal/simple-tests-on-react)
-[![dependencies Status](https://david-dm.org/razrabotal/simple-tests-on-react/status.svg)](https://david-dm.org/razrabotal/simple-tests-on-react)
-</center>
+
+
+
 
 # Simple Tests
+
+[![Build Status](https://travis-ci.org/razrabotal/simple-tests-on-react.svg?branch=master)](https://travis-ci.org/razrabotal/simple-tests-on-react)
+[![dependencies Status](https://david-dm.org/razrabotal/simple-tests-on-react/status.svg)](https://david-dm.org/razrabotal/simple-tests-on-react)
 
 It is a React-app that adds awesome test to any web-page. 
 
