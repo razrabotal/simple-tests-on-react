@@ -14,6 +14,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "coveralls": "^3.0.1"
+    "coveralls": "^3.0.1",
+    "mocha-lcov-reporter": "^1.3.0"
   }
 }
