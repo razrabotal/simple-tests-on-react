@@ -9,120 +9,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 
-ReactDOM.render(<App prueba={parseInner(document.getElementById('root').innerHTML)} dataf={
-    {
-      title: "Тест о конях",
-      descr: "Тест даст понять насколько хорошо вы разбираетесь в конях.",
-      questions: [
-        {
-          id: 1,
-          img: "https://freewoman.club/files/image/orig/kak-dela-min_409.jpg",
-          imgDescr: "Фото там какое-то",
-          q: "Как вас зовут?",
-          an: [
-            {
-              id: 1,
-              text: "Света",
-              comment: "Правильно",
-              correct: true
-            },
-            {
-              id: 2,
-              text: "Свитка",
-              comment: "Не, нифига"
-            },
-            {
-              id: 3,
-              text: "Світка",
-              comment: "Не, нифига",
-            }
-          ]
-        },
-        {
-          id: 2,
-          q: "Как дела?",
-          an: [
-            {
-              id: 1,
-              text: "Норм",
-              comment: "Неее, дела уже хорошо",
-            },
-            {
-              id: 2,
-              text: "Хорошо",
-              comment: "Дааааааа. Все ок.",
-              correct: true
-            }
-          ]
-        },
-        {
-          id: 3,
-          img: "http://w-n.com.ua/wp-content/uploads/2016/10/прогноз-погоды-на-зиму-в-Украине-2016-2017-650x276.jpg",
-          q: "Что принесла зима",
-          an: [
-            {
-              id: 1,
-              text: "Холод",
-              comment: "Нет, холод она не принесла"
-            },
-            {
-              id: 2,
-              text: "Вьюгу",
-              comment: "Ну да, вьюга была",
-              correct: true
-            },
-            {
-              id: 3,
-              text: "Метель",
-              comment: "Метели не было",
-            }
-          ]
-        },
-        {
-          id: 4,
-          q: "Параметры съемки фотоаппарата изменяются физическими ручками и кнопками, а не виртуальными элементами на экране. С какой точки зрения это хорошо?",
-          an: [
-            {
-              id: 1,
-              text: "Ни с какой, такой подход устарел и не соответствует идее человечности",
-              comment: "Ноуп"
-            },
-            {
-              id: 2,
-              text: "Благодаря постоянному расположению вырабатывается привычка, пользователь изменяет настройки не глядя",
-              comment: "Да да",
-              correct: true
-            },
-            {
-              id: 3,
-              text: "Интерфейс лишён модальности",
-              comment: "Что такое модальность?",
-            },
-            {
-              id: 4,
-              text: "Новичку сразу вск понятно",
-              comment: "Не понятно",
-            }
-          ]
-        }
-      ],    
-      results: [
-        {
-          points: 4,
-          text: "Вы шарите в конях"
-        },
-        {
-          points: 2,
-          text: "Вы плохо понимаете в конях"
-        },
-        {
-          points: 0,
-          text: "Вы недостаточно понимаете в конях"
-        }
-      ]
-    }
-    
-  }/>,
+ReactDOM.render(
+  <App prueba={parseInner(document.getElementById('root').innerHTML)}/>,
   document.getElementById('root')
 );
 
@@ -147,7 +35,7 @@ var titleAndDescr = '';
 
 if( titleCheckCorrect(innerArray[0]) ) {
   var titleArray = parseTitleArray(innerArray[0]);
-  var titleAndDescr = `
+  titleAndDescr = `
     "title": "${titleArray[0].trim()}", 
     "descr": "${titleArray[1].trim()}",
   `;
@@ -155,7 +43,7 @@ if( titleCheckCorrect(innerArray[0]) ) {
 }  
 
 function titleCheckCorrect(data) {
-  return data.trim().match(/^\##/);
+  return data.trim().match(/^##/);
 }
 
 function parseTitleArray(data) {
@@ -172,11 +60,11 @@ var resultsArray = parseResultArray(innerArray[innerArray.length-1]);
 if(resultCheckCorrect(resultsArray[0])) {
   
   for(var item of resultsArray) {
-    var itemArray = item.split("-");
+    var iArray = item.split("-");
     resultsForJSON.push(`
       {
-        "points": ${itemArray[0].trim()},
-        "text": "${itemArray[1].trim()}"
+        "points": ${iArray[0].trim()},
+        "text": "${iArray[1].trim()}"
       }
     `);
   }
@@ -264,7 +152,7 @@ for(var j = 0; j < innerArray.length; j++) {
   questionsArray.push(`{ ${id} ${img} ${title} ${answers} }`);
 }
 
-var questions = '"questions": [ '+ questionsArray.toString() +' ]';
+questions = '"questions": [ '+ questionsArray.toString() +' ]';
 
 // Final step
 return JSON.parse(`{${titleAndDescr} ${questions} ${results}}`);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 // class App extends Component {
@@ -121,6 +121,7 @@ class App extends Component{
                 length={this.state.lol.length}
                />;
           }
+          return null;
       });
      
      var showResultText = (() => {
@@ -207,7 +208,7 @@ class Question extends React.Component{
     
      var that = this;
     var que = this.state.que;
-    var iter = this.props.iteration;
+    // var iter = this.props.iteration;
      
     var qList = que.an.map(function(item,index){
    
@@ -228,7 +229,7 @@ class Question extends React.Component{
         </li>; 
      })
     
-    var imgRender = (que.img) ? <div className="q-img"><img src={que.img}/></div> : '';
+    var imgRender = (que.img) ? <div className="q-img"><img alt="" src={que.img}/></div> : '';
       
     return (
       <div className="q-question">
