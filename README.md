@@ -5,8 +5,9 @@
 
 # Simple Tests
 
+
 [![Build Status](https://travis-ci.org/razrabotal/simple-tests-on-react.svg?branch=master)](https://travis-ci.org/razrabotal/simple-tests-on-react)
-[![dependencies Status](https://david-dm.org/razrabotal/simple-tests-on-react/status.svg)](https://david-dm.org/razrabotal/simple-tests-on-react)
+[![dependencies Status](https://david-dm.org/razrabotal/simple-tests-on-react/status.svg)](https://david-dm.org/razrabotal/simple-tests-on-react) 
 
 This is a React-app that adds awesome test to any web-page. 
 
@@ -85,4 +86,10 @@ What is your name?
 
 ![alt text](https://taras.top/share/tests/example.jpg "Example test")
 
+## Versions
+
+Version | Description
+------------ | -------------
+0.1 | Add question
+0.2 | Add image for questions, results, questions counter
 
