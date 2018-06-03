@@ -143,7 +143,7 @@ class App extends Component{
      
      var showProgress = (this.state.current > this.state.list.length) ? 
          <div className="q-reload" onClick={e => this.reload(e)}>
-           <div class="refresh icon"></div>
+           <div className="refresh icon"></div>
          </div> : '';
      // <input type="button" className="q-reload" value="По новой" />;
      
@@ -162,7 +162,7 @@ class App extends Component{
           { showList }
             <div className="q-final">
               { showFinal }
-              <p>{ showProgress }</p>
+              <div>{ showProgress }</div>
             </div>    
           </div>
         
