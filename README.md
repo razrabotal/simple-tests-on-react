@@ -86,7 +86,7 @@ What is your name?
 </div>
 ```
 
-![alt text](https://taras.top/share/tests/example.jpg "Example test")
+![alt text](presentation/example.jpg "Example test")
 
 ## Versions
 
