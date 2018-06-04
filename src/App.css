@@ -85,10 +85,12 @@ margin-bottom: 56px;
 display: flex;
 flex-direction: column;
 margin-bottom: 16px;
+padding: 0!important;
 }
 .q-list-item {
 display: flex;
 align-items: center;
+margin: 0!important;
 }
 .q-button {
 border: 0;
