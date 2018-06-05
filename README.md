@@ -28,7 +28,7 @@ Add two lines to your code.
 <script src="https://taras.top/share/tests/script.js"></script>
 ```
 
-Add div emelent.
+Add div emelent. 
 ```html
 <div id="root">
 </div>
