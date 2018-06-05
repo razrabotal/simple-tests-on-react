@@ -4,7 +4,7 @@
 
 
 # Simple Tests
-
+ 
 
 [![Build Status](https://travis-ci.org/razrabotal/simple-tests-on-react.svg?branch=master)](https://travis-ci.org/razrabotal/simple-tests-on-react)
 [![dependencies Status](https://david-dm.org/razrabotal/simple-tests-on-react/status.svg)](https://david-dm.org/razrabotal/simple-tests-on-react) 
@@ -28,7 +28,7 @@ Add two lines to your code.
 <script src="https://taras.top/share/tests/script.js"></script>
 ```
 
-Add div emelent.
+Add div emelent. 
 ```html
 <div id="root">
 </div>
@@ -86,7 +86,7 @@ What is your name?
 </div>
 ```
 
-![alt text](https://taras.top/share/tests/example.jpg "Example test")
+![alt text](presentation/example.jpg "Example test")
 
 ## Versions
 
@@ -94,3 +94,4 @@ Version | Description
 ------------ | -------------
 0.1 | Add question
 0.2 | Add image for questions, results, questions counter
+
