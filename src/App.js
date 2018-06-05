@@ -95,16 +95,21 @@ class App extends Component{
     
     return (
       <div>    
+
         <div className="q-main-title">
           <h1 className="q-main-title-h1">{this.props.prueba.title}</h1>
           <p className="q-main-title-p">{this.props.prueba.descr}</p>
         </div>
+
         <div className="q-container">
+
           { showList }
+
           <div className="q-final">
             { showFinal }
             <div>{ showProgress }</div>
           </div>    
+          
         </div>
       </div>
     );

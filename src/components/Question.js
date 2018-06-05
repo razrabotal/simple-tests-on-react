@@ -1,4 +1,5 @@
 import React from 'react';
+import './Question.css';
 
 class Question extends React.Component{
 	constructor(props){
@@ -41,10 +42,12 @@ class Question extends React.Component{
             classesLi = `q-list-item ${qUserSelect} ${qTrue}`;
             
       return <li key={index} className={classesLi}>
-        <div       
-          className={classesButton}
-          onClick={e => that.onChanged(e, item.comment, item.correct, item.id)}
-          >{item.text}</div>
+          <div       
+            className={classesButton}
+            onClick={e => that.onChanged(e, item.comment, item.correct, item.id)}
+          >
+            {item.text}
+          </div>
       </li>; 
      })
     
@@ -60,11 +63,10 @@ class Question extends React.Component{
           <div className="q-number">{this.state.que.id}/{this.props.length}</div>
         </div>
         
-        
-        <ul className="q-list">
+        <div className="q-list">
           { qList }
-        </ul>
-        <p>{this.state.comment}</p>
+        </div>
+        <div className="q-comment">{this.state.comment}</div>
       </div>
     );
    }
