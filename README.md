@@ -30,13 +30,13 @@ Add two lines to your code.
 
 Add div emelent. 
 ```html
-<div id="root">
+<div id="q-simple">
 </div>
 ```
 
 Write your test.
 ```html
-<div id="root">
+<div id="q-simple">
     ## Test title
     # Test Description
     
@@ -63,7 +63,7 @@ Write your test.
 Live demo: [https://codepen.io/razrabotal/pen/dKGPWR](https://codepen.io/razrabotal/pen/dKGPWR)
 
 ```html
-<div id="root">
+<div id="q-simple">
 ## Hello, world
 # This is example test
 
