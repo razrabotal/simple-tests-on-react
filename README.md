@@ -24,8 +24,8 @@ yarn start
 
 Add two lines to your code.
 ```html
-<link rel="stylesheet" href="https://taras.top/share/tests/main.css">
-<script src="https://taras.top/share/tests/script.js"></script>
+<link href="https://taras.top/share/tests/main.css" rel="stylesheet">
+<script src="https://taras.top/share/tests/main.js"></script>
 ```
 
 Add div emelent. 
