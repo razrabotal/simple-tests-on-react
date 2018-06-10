@@ -59,44 +59,6 @@
   margin-bottom: 16px!important;
 }
 
-.q-reload {
-  padding: 8px 16px;
-  box-sizing: content-box;
-}
-.refresh.icon {
-  color: #444;
-  position: relative;
-  margin-left: 4px;
-  margin-top: 3px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border-top: solid 1px currentColor;
-  border-bottom: solid 1px currentColor;
-  border-left: solid 1px transparent;
-  border-right: solid 1px currentColor;
-  transition: 0.2s;
-  box-sizing: content-box!important;
-}
-.refresh.icon:before {
-  content: '';
-  position: absolute;
-  left: 1px;
-  top: 12px;
-  width: 6px;
-  height: 5px;
-  border-top: solid 1px currentColor;
-  border-left: solid 1px currentColor;
-  -webkit-transform: rotate(-12.5deg);
-  transform: rotate(-12.5deg);
-  box-sizing: content-box;
-}
-.q-reload:hover .refresh.icon{
-  transform: rotate(15deg);
-  color: var(--green);
-  cursor: pointer;
-}
-
 .q-result-counts {
   font-size: 21px;
   letter-spacing: 2px;
@@ -107,8 +69,6 @@
   text-align: center;
   font-size: 14px;
 }
-
-
 
 .reload-icon {
   width: 24px;
@@ -122,30 +82,11 @@
   transform: rotate(0deg);
   transition: 0.2s;
 }
-
-.reload-icon path {
-  /* animation: dash2 0.5s ease-in forwards; */
-}
-
-@keyframes dash2 {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
- 
-.reload-icon polyline {
-  /* animation: dash2 0.5s 0.5s ease-in forwards; */
-}
-
 .q-reload:hover .reload-icon {
   transform: rotate(15deg);
   stroke: var(--green);
   cursor: pointer;
 }
-
-
-
-
 
 .q-result-circle { 
   position: relative;
@@ -162,8 +103,6 @@
   left: 0;
   stroke-dasharray: 30.25;
   stroke-dashoffset: 31;
-  
-
 }
 .svg-result--background {
   position: absolute;
