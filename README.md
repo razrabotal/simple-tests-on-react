@@ -24,19 +24,19 @@ yarn start
 
 Add two lines to your code.
 ```html
-<link rel="stylesheet" href="https://taras.top/share/tests/main.css">
-<script src="https://taras.top/share/tests/script.js"></script>
+<link href="https://taras.top/share/tests/main.css" rel="stylesheet">
+<script src="https://taras.top/share/tests/main.js"></script>
 ```
 
 Add div emelent. 
 ```html
-<div id="root">
+<div id="q-simple">
 </div>
 ```
 
 Write your test.
 ```html
-<div id="root">
+<div id="q-simple">
     ## Test title
     # Test Description
     
@@ -63,7 +63,7 @@ Write your test.
 Live demo: [https://codepen.io/razrabotal/pen/dKGPWR](https://codepen.io/razrabotal/pen/dKGPWR)
 
 ```html
-<div id="root">
+<div id="q-simple">
 ## Hello, world
 # This is example test
 
