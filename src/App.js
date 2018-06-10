@@ -81,18 +81,50 @@ class App extends Component{
        }
        return '';
      })();
+
+    var calcPercent = Math.round(this.state.points / this.state.lol.length * 100);
      
-     var showFinal = (this.state.current === this.state.lol.length+1) ? 
-         <div className="q-result">
-           <p>Вы набрали баллов: {this.state.points}</p>
-           <p className="q-result-text">{showResultText}</p>
-         </div> : '';
+    const maxOffset = 31;
+    var offsetForAnimation = maxOffset - Math.round(maxOffset * calcPercent / 100);
+    var styles = {
+      animation: "circle" + offsetForAnimation + " 2s forwards"
+    };
+
+    var showFinal = (this.state.current === this.state.lol.length+1) ? 
+        <div className="q-result">
+
+          <div className="q-result-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" class="svg-result svg-result--background" viewBox="0 0 10.61 10.61"><path d="M5.31.5A4.81,4.81,0,1,1,.5,5.31,4.81,4.81,0,0,1,5.31.5"/></svg>  
+            <svg xmlns="http://www.w3.org/2000/svg" style={styles} class="svg-result" viewBox="0 0 10.61 10.61"><path d="M5.31.5A4.81,4.81,0,1,1,.5,5.31,4.81,4.81,0,0,1,5.31.5"/></svg>
+          
+            <div className="q-result-counts">
+              { this.state.points }/{ this.state.lol.length }
+            </div>  
+            <div className="q-result-percent">
+              { calcPercent }%
+          </div> 
+          </div>
+
+                
+          
+          <p className="q-result-text">
+            {showResultText} 
+          </p>
+        </div> : '';
      
-     var showProgress = (this.state.current > this.state.list.length) ? 
+    var showReload = (this.state.current > this.state.list.length) ? 
          <div className="q-reload" onClick={e => this.reload(e)}>
-           <div className="refresh icon"></div>
+           <svg xmlns="http://www.w3.org/2000/svg" className="reload-icon" viewBox="0 0 8.88 7.57"><path d="M5.09.5A3.28,3.28,0,1,1,2.34,2"/><polyline points="0.19 2.88 2.34 1.99 3.48 3.78"/></svg>
          </div> : '';
     
+    var showCircles = () => { 
+      let mass = [];
+      for(let i = 1; i <= this.state.list.length-this.state.current; i++) {
+        mass = [...mass, <div className="q-title-number q-title-number--list">{this.state.current + i}</div>];
+      } 
+      return <div className="q-circles"> { mass } </div>;
+    };
+
     return (
       <div>    
 
@@ -105,9 +137,11 @@ class App extends Component{
 
           { showList }
 
+          { showCircles() }
+ 
           <div className="q-final">
             { showFinal }
-            <div>{ showProgress }</div>
+            <div>{ showReload }</div>
           </div>    
           
         </div>
