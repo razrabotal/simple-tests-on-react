@@ -34,6 +34,7 @@
 }
 .q-main-title-p {
   font-size: 16px;
+  line-height: 1.4;
 }
 
 
@@ -43,7 +44,8 @@
   margin-bottom: 40px;
 }
 .q-final {
-  display: flex;
+  /* display: flex; */
+  text-align: center;
   justify-content: space-between;
 }
 
@@ -54,41 +56,90 @@
 
 .q-result-text {
   font-size: 24px;
+  margin-bottom: 16px!important;
 }
 
-.q-reload {
-  padding: 8px 16px;
+.q-result-counts {
+  font-size: 21px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding-top: 30%;
 }
-.refresh.icon {
-  color: #444;
-  position: relative;
-  margin-left: 4px;
-  margin-top: 3px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border-top: solid 1px currentColor;
-  border-bottom: solid 1px currentColor;
-  border-left: solid 1px transparent;
-  border-right: solid 1px currentColor;
+.q-result-percent {
+  text-align: center;
+  font-size: 14px;
+}
+
+.reload-icon {
+  width: 24px;
+  fill:none;
+  stroke:#444;
+
+  stroke-linejoin:round;
+  stroke-miterlimit:10;
+  stroke-width: 0.75;
+
+  transform: rotate(0deg);
   transition: 0.2s;
-  box-sizing: content-box;
 }
-.refresh.icon:before {
-  content: '';
-  position: absolute;
-  left: 1px;
-  top: 12px;
-  width: 6px;
-  height: 5px;
-  border-top: solid 1px currentColor;
-  border-left: solid 1px currentColor;
-  -webkit-transform: rotate(-12.5deg);
-  transform: rotate(-12.5deg);
-  box-sizing: content-box;
-}
-.q-reload:hover .refresh.icon{
+.q-reload:hover .reload-icon {
   transform: rotate(15deg);
-  color: var(--green);
+  stroke: var(--green);
   cursor: pointer;
 }
+
+.q-result-circle { 
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px;
+}
+
+.svg-result {
+  width: 100px;
+  fill:none;
+  stroke:var(--green);
+  position: absolute;
+  left: 0;
+  stroke-dasharray: 30.25;
+  stroke-dashoffset: 31;
+}
+.svg-result--background {
+  position: absolute;
+  z-index: -1;
+  left:0;
+  stroke:#eee;
+  stroke-dashoffset: 0;
+}
+
+@keyframes circle1 { to { stroke-dashoffset:1 ; }}
+@keyframes circle2 { to { stroke-dashoffset:2 ; }}
+@keyframes circle3 { to { stroke-dashoffset:3 ; }}
+@keyframes circle4 { to { stroke-dashoffset:4 ; }}
+@keyframes circle5 { to { stroke-dashoffset:5 ; }}
+@keyframes circle6 { to { stroke-dashoffset:6 ; }}
+@keyframes circle7 { to { stroke-dashoffset:7 ; }}
+@keyframes circle8 { to { stroke-dashoffset:8 ; }}
+@keyframes circle9 { to { stroke-dashoffset:9 ; }}
+@keyframes circle10 { to { stroke-dashoffset:10 ; }}
+@keyframes circle11 { to { stroke-dashoffset:11 ; }}
+@keyframes circle12 { to { stroke-dashoffset:12 ; }}
+@keyframes circle13 { to { stroke-dashoffset:13 ; }}
+@keyframes circle14 { to { stroke-dashoffset:14 ; }}
+@keyframes circle15 { to { stroke-dashoffset:15 ; }}
+@keyframes circle16 { to { stroke-dashoffset:16 ; }}
+@keyframes circle17 { to { stroke-dashoffset:17 ; }}
+@keyframes circle18 { to { stroke-dashoffset:18 ; }}
+@keyframes circle19 { to { stroke-dashoffset:19 ; }}
+@keyframes circle20 { to { stroke-dashoffset: 20; }}
+@keyframes circle21 { to { stroke-dashoffset: 21; }}
+@keyframes circle22 { to { stroke-dashoffset: 22; }}
+@keyframes circle23 { to { stroke-dashoffset: 23; }}
+@keyframes circle24 { to { stroke-dashoffset: 24; }}
+@keyframes circle25 { to { stroke-dashoffset: 25; }}
+@keyframes circle26 { to { stroke-dashoffset: 26; }}
+@keyframes circle27 { to { stroke-dashoffset: 27; }}
+@keyframes circle28 { to { stroke-dashoffset: 28; }}
+@keyframes circle29 { to { stroke-dashoffset: 29; }}
+@keyframes circle30 { to { stroke-dashoffset: 30; }}
+@keyframes circle31 { to { stroke-dashoffset: 31; }}

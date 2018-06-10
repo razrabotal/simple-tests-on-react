@@ -84,7 +84,7 @@ function parseInner(text) {
     var id = `"id":"${j+1}", `;
   
     // Set Title
-    var title = `"q": "${itemArray[0]}", `;
+    var title = `"q": "${itemArray[0].trim()}", `;
     itemArray.shift();
   
     // Set Image
