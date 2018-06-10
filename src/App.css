@@ -119,8 +119,6 @@
   stroke-miterlimit:10;
   stroke-width: 0.75;
 
-  /* stroke-dasharray: 30;
-  stroke-dashoffset: 30; */
   transform: rotate(0deg);
   transition: 0.2s;
 }
@@ -174,12 +172,7 @@
   stroke:#eee;
   stroke-dashoffset: 0;
 }
-/* 
-@keyframes dash3 {
-  to {
-    stroke-dashoffset: 0; 
-  }
-} */
+
 @keyframes circle1 { to { stroke-dashoffset:1 ; }}
 @keyframes circle2 { to { stroke-dashoffset:2 ; }}
 @keyframes circle3 { to { stroke-dashoffset:3 ; }}
