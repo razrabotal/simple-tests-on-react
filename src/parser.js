@@ -5,11 +5,28 @@ function parseInner(text) {
     data = data.replace(/\n *\n/gi,"\n\n").trim()
     return data;
   }
+
+  // Key test
+  var keyTest = '';
+  if( keyCheckCorrect(innerArray[0])) {
+    var parsedKey = parseKey(innerArray[0]);
+    keyTest = `
+      "qkey": "${parsedKey}", 
+    `;
+    innerArray.shift();
+  }  
+  function keyCheckCorrect(data) {
+    return data.trim().match(/^\$\w{10}/);
+  }
+  function parseKey(data) {
+    data = data.replace(/\$/gi,"").trim();
+    return data;
+  } 
   
   // Title and Description
   var titleAndDescr = '';
   
-  if( titleCheckCorrect(innerArray[0]) ) {
+  if( titleCheckCorrect(innerArray[0])) {
     var titleArray = parseTitleArray(innerArray[0]);
     titleAndDescr = `
       "title": "${titleArray[0].trim()}", 
@@ -19,14 +36,13 @@ function parseInner(text) {
   }  
   
   function titleCheckCorrect(data) {
-    return data.trim().match(/^##/);
+    return data.trim().match(/^# | ##/);
   }
   
   function parseTitleArray(data) {
-    data = data.replace(/## |# /gi,"").split("\n");
+    data = data.replace(/# |## /gi,"").split("\n");
     return data;
-  }
-  
+  }  
   
   // Test results
   var results = '';
@@ -131,7 +147,7 @@ function parseInner(text) {
   questions = '"questions": [ '+ questionsArray.toString() +' ]';
   
   // Final step
-  return JSON.parse(`{${titleAndDescr} ${questions} ${results}}`);
+  return JSON.parse(`{${keyTest} ${titleAndDescr} ${questions} ${results}}`);
   }
 
 

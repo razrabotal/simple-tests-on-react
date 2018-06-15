@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Question from './components/Question';
 
+
 class App extends Component{
 	constructor(props){
 		super(props);
@@ -14,14 +15,63 @@ class App extends Component{
       current: 1,
       points: 0,     
       list: [],
-      showList: []
+      showList: [],
+      gettedRes: []
     };
-	} 
+  } 
   
+  parseResultsString(str) {  
+    let array = str.split(";");
+    for(let i = 0; i < array.length; i++) {
+      array[i] = array[i].split(",").map(item => parseInt(item,10));
+    } 
+    return array;
+  }
+  
+
   componentDidMount() {
     this.setState({
       list: [...this.state.lol]
     })
+
+  
+    if(this.props.prueba.qkey) {
+      let qkey = this.props.prueba.qkey;
+      fetch(`http://taras.top/svalka/test.php?qkey=${qkey}`)
+      .then(response => response.json())
+      .then(data => { 
+        if(data[0]) {     
+           this.setState({ gettedRes: this.parseResultsString(data[0].result) }) 
+          }
+        });
+        
+      let initialResult = [];
+      for(let item of this.state.lol) {
+        var temprray = [];
+        for(let itemitem of item.an) {
+          if(itemitem) {
+            temprray.push(0);
+          }
+        }
+        initialResult.push(temprray.join(","));
+      }
+      initialResult = initialResult.join(";");
+
+      this.setState({ 
+        gettedRes: this.parseResultsString(initialResult) 
+      });
+
+      if(this.state.gettedRes === [] ) {
+        fetch(`http://taras.top/svalka/test.php?qkey=${qkey}&result=${initialResult}`, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          }
+        })
+      }
+    }
+
   }
   
   reload() {
@@ -32,18 +82,38 @@ class App extends Component{
     });
   }
   
-  currentIteration(e, correct) {
+  currentIteration(e, correct, index, statistics) {
     e.preventDefault();
    
     if(correct) {
        this.setState({
         points: this.state.points + 1
-        })
-      }
-
-      this.setState({
-        current: this.state.current + 1,
       })
+    }
+
+    this.setState({
+        current: this.state.current + 1,
+    })
+
+    let gettedRes = this.state.gettedRes;
+    gettedRes[index] = statistics;
+
+    let finalRes = [];
+    for(let item of gettedRes) {
+      finalRes.push(item.join(","));
+    }
+    finalRes = finalRes.join(";");
+
+    if(this.props.prueba.qkey) {
+      let qkey = this.props.prueba.qkey;
+      fetch(`http://taras.top/svalka/test.php?qkey=${qkey}&result=${finalRes}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      })
+    }
   }
   
   addToList(id) {
@@ -58,14 +128,16 @@ class App extends Component{
 
    render() {
      var showList = this.state.list.map((que,index) => {
-          if(this.state.current >= que.id) {
+          if(this.state.current >= +que.id) {
              return <Question 
                 key={`${this.state.dataCounter}_${index}`} 
+                index={index}
                 selected={false} 
                 next2={que} 
                 cur={this.state.current} 
                 iteration={this.currentIteration}
                 length={this.state.lol.length}
+                statistics={this.state.gettedRes[index]}
                />;
           }
           return null;
@@ -84,7 +156,7 @@ class App extends Component{
 
     var calcPercent = Math.round(this.state.points / this.state.lol.length * 100);
      
-    const maxOffset = 31;
+    const maxOffset = 30;
     var offsetForAnimation = maxOffset - Math.round(maxOffset * calcPercent / 100);
     var styles = {
       animation: "circle" + offsetForAnimation + " 2s forwards"
@@ -94,9 +166,11 @@ class App extends Component{
         <div className="q-result">
 
           <div className="q-result-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" class="svg-result svg-result--background" viewBox="0 0 10.61 10.61"><path d="M5.31.5A4.81,4.81,0,1,1,.5,5.31,4.81,4.81,0,0,1,5.31.5"/></svg>  
-            <svg xmlns="http://www.w3.org/2000/svg" style={styles} class="svg-result" viewBox="0 0 10.61 10.61"><path d="M5.31.5A4.81,4.81,0,1,1,.5,5.31,4.81,4.81,0,0,1,5.31.5"/></svg>
-          
+            <svg xmlns="http://www.w3.org/2000/svg" className="svg-result svg-result--background" viewBox="0 0 10.55 10.55"><path d="M5.27.5A4.77,4.77,0,1,1,.5,5.27,4.77,4.77,0,0,1,5.27.5"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" style={styles} className="svg-result" viewBox="0 0 10.55 10.55"><path d="M5.27.5A4.77,4.77,0,1,1,.5,5.27,4.77,4.77,0,0,1,5.27.5"/></svg>
+            {/* <svg xmlns="http://www.w3.org/2000/svg" className="svg-result svg-result--background" viewBox="0 0 10.61 10.61"><path d="M5.31.5A4.81,4.81,0,1,1,.5,5.31,4.81,4.81,0,0,1,5.31.5"/></svg>  
+            <svg xmlns="http://www.w3.org/2000/svg" style={styles} className="svg-result" viewBox="0 0 10.61 10.61"><path d="M5.31.5A4.81,4.81,0,1,1,.5,5.31,4.81,4.81,0,0,1,5.31.5"/></svg>
+           */}
             <div className="q-result-counts">
               { this.state.points }/{ this.state.lol.length }
             </div>  
@@ -120,7 +194,7 @@ class App extends Component{
     var showCircles = () => { 
       let mass = [];
       for(let i = 1; i <= this.state.list.length-this.state.current; i++) {
-        mass = [...mass, <div className="q-title-number q-title-number--list">{this.state.current + i}</div>];
+        mass = [...mass, <div className="q-title-number q-title-number--list"></div>];
       } 
       return <div className="q-circles"> { mass } </div>;
     };
@@ -134,14 +208,15 @@ class App extends Component{
         </div>
 
         <div className="q-container">
-
-          { showList }
+          <div className="q-question-list">
+            { showList }
+          </div>
 
           { showCircles() }
  
           <div className="q-final">
             { showFinal }
-            <div>{ showReload }</div>
+            <div className="q-reload-icon">{ showReload }</div>
           </div>    
           
         </div>

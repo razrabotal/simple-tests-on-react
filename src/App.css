@@ -1,8 +1,9 @@
 #q-simple {
   font-family: Verdana;
-  max-width: 800px;
+  max-width: 850px;
   box-sizing: border-box;
 }
+
 
 /* Reset styles */
 #q-simple *,
@@ -33,7 +34,7 @@
   margin-bottom: 16px;
 }
 .q-main-title-p {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.4;
 }
 
@@ -41,8 +42,24 @@
 .q-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+
 }
+
+.q-circles {
+  margin-bottom: 170px;
+  position: relative;
+  z-index: -30;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: -23px;
+}
+.q-result {
+  margin-top: -100px;
+}
+
 .q-final {
   /* display: flex; */
   text-align: center;
@@ -61,13 +78,14 @@
 
 .q-result-counts {
   font-size: 21px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-align: center;
-  padding-top: 30%;
+  padding-top: 28%;
+  margin-bottom: 3px;
 }
 .q-result-percent {
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .reload-icon {
@@ -81,6 +99,7 @@
 
   transform: rotate(0deg);
   transition: 0.2s;
+  transform-origin: 55% center;
 }
 .q-reload:hover .reload-icon {
   transform: rotate(15deg);
@@ -101,8 +120,8 @@
   stroke:var(--green);
   position: absolute;
   left: 0;
-  stroke-dasharray: 30.25;
-  stroke-dashoffset: 31;
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
 }
 .svg-result--background {
   position: absolute;
@@ -112,6 +131,7 @@
   stroke-dashoffset: 0;
 }
 
+@keyframes circle0 { to { stroke-dashoffset:0 ; }}
 @keyframes circle1 { to { stroke-dashoffset:1 ; }}
 @keyframes circle2 { to { stroke-dashoffset:2 ; }}
 @keyframes circle3 { to { stroke-dashoffset:3 ; }}
@@ -142,4 +162,3 @@
 @keyframes circle28 { to { stroke-dashoffset: 28; }}
 @keyframes circle29 { to { stroke-dashoffset: 29; }}
 @keyframes circle30 { to { stroke-dashoffset: 30; }}
-@keyframes circle31 { to { stroke-dashoffset: 31; }}
