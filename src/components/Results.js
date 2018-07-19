@@ -31,7 +31,7 @@ class Results extends Component{
       return '';
     })();
 
-    const showReload = (this.props.current > this.props.list.length) && 
+    const showReload = (this.props.current > this.props.questions.length) && 
           <div className="q-reload" onClick={ () => this.props.reload() }>
             <svg xmlns="http://www.w3.org/2000/svg" className="reload-icon" viewBox="0 0 8.88 7.57">
               <path d="M5.09.5A3.28,3.28,0,1,1,2.34,2"/>

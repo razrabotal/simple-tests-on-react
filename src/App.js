@@ -171,17 +171,18 @@ class App extends Component{
                 index={index}
                 question={question} 
                 iteration={this.currentIteration}
+                statistics={this.state.gettedRes[index]}
                />;
           }
           return null;
       });
      
-    const Next = () => this.state.onVote && (
+    const Next = () => this.state.onVote ? (
       <div className="q-next" onClick={this.nextQue}>
         <span className="q-next__button">
           <span className="q-next__arrow"></span>
         </span>
-      </div>);
+      </div>) : '';
 
     const Circles = () => { 
       let mass = [];
@@ -204,8 +205,8 @@ class App extends Component{
         <p className="q-main-title-p">{this.props.data.descr}</p>
       </div>;
 
-    const Final = () => (this.state.current === this.state.questions.length + 1) && 
-      <Results reload={this.reload} {...this.state}/>;
+    const Final = () => (this.state.current === this.state.questions.length + 1) ? 
+      <Results reload={this.reload} {...this.state}/> : '';
 
     return (
       <div>    
