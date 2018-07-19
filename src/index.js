@@ -9,7 +9,7 @@ var html = document.getElementById('q-simple').innerHTML;
 document.getElementById('q-simple').innerHTML = "";
 
 ReactDOM.render(
-  <App prueba={parseInner(html)}/>,
+  <App data={parseInner(html)}/>,
   document.getElementById('q-simple')
 );
 

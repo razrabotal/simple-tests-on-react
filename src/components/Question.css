@@ -3,57 +3,11 @@
   --greenLight: #cdeccf;
 }
 
-.q-question-list {
-  /* display: flex;
-  flex-direction: column-reverse; */
-}
-
-.q-question {
-  /* margin-bottom: 32px; */
-  position: relative;
-}
-
-/* .q-question:before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  width: 100%;
-  display: block;
-  margin-bottom: 7px;
-  margin-top: 1px;
-  font-size: 24px;
-  background: #eee;
-  height: 10px;
-  border-radius: 5px;
-  animation: fade-out 0.25s forwards;
-  left: 0;
-  right: 0;
-  margin: auto;
-} */
 .q-question {
   position: relative;
-  /* margin-top: -10px; */
-  /* margin-bottom: 0; */
-  /* animation: show-que 0.2s 0.5s ease-out forwards;  */
 }
-/* .q-question > .q-list{ 
-  animation: show-que 0.4s ease-out forwards; 
-  transform-origin: bottom left;
-  will-change: transform;
-} */
 
-/* .q-question:first-child {
-  opacity: 1;
-  animation: an-que 0.5s 0.5s ease-out forwards; 
-}
-.q-question:only-child {
-  animation: none!important; 
-  opacity: 1!important;
-}
-.q-question:first-child:nth-last-child(2) {
-  animation: none!important; 
-  opacity: 1!important;
-} */
+/* If Display mode is LIST_REVERSE */
 .q-question-list-anim {
   opacity: 0;
   max-height: 0;
@@ -82,13 +36,14 @@
   }
 }
 
+/* If Display mode is SINGLE */
 .q-question-single-anim {
   opacity: 0;
   will-change: opacity, transform;
 }
 .q-question-single-anim:first-child {
   max-height: initial!important;
-  animation: show-single 0.5s ease-out forwards; 
+  animation: show-single 0.25s ease-out forwards; 
 }
 @keyframes show-single {
   0% {
@@ -102,109 +57,7 @@
 }
 
 
-/* .q-question:nth-child(3) {
-  animation: hide-tr 0.5s ease-out forwards; 
-} */
-@keyframes hide-tr {
-  0% {
-    opacity: 1;
-    padding-bottom: 0px;
-  }
-  100% {
-    opacity: 0;
-    padding-bottom: 40px;
-  }
-}
-
-
-
-@keyframes an-que {
-  0% {
-    /* top: 100px; */
-    opacity: 1;
-    /* max-height: 400px; */
-    /* transform: scale(1,1); */
-    margin-bottom: 40px;
-    max-height: 100vh;
-    top: 0;
-  }
-  100% {
-    /* top: 0px; */
-    top: 100vh;
-    opacity: 0;
-    max-height: 0;
-    /* transform: scale(1,0); */
-    
-    /* max-height: 0px; */
-    margin-bottom: 0px;
-  }
-
-}
-/* .q-question:last-child {
-  margin-bottom: 300px;
-} */
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-   width: 100%;
-  }
-  50% {
-    opacity: 1;
-    width: 50%;
-  }
-  100% {
-    opacity: 1;
-    width: 0%;
-  }
-}
- /* .q-question:before {
-  content: "";
-  position: static;
-  top: 0;
-  width: 100%;
-  display: block;
-  margin-bottom: 7px;
-  margin-top: 1px;
-  font-size: 24px;
-  background: #eee;
-  height: 10px;
-  border-radius: 50px;
-}  */
-/* 
-.q-question-list > *:last-child:after {
-  content: "";
-  display: block;
-  margin-bottom: 7px;
-  margin-top: 1px;
-  font-size: 24px;
-  background: #eee;
-  height: 10px;
-  border-radius: 50px;
-} */
-
-@keyframes show-que {
-  0% {
-    /* margin-top: -100px; */
-    /* top: -100px; */
-    /* top: 30px; */
-    opacity: 0;
-  }
-
-  100% {
-    /* top: 0; */
-    opacity: 1;
-  }
-}
-/* .q-question-list .q-question:first-child {
-  transform: scale(1,1)!important;
-  opacity: 1!important;
-  animation: none;
-} */
-
-
 .q-img {
-  /* margin-top: 8px; */
   margin-bottom: 4px;
 }
 .q-img img {
@@ -237,21 +90,7 @@
   margin-right: 5px;
   margin-left: -1px;
 }
-/* .q-title-number {
-  display: inline-block;
-  margin-right: 5px;
-  margin-top: -3px;
-  font-weight: 400;
-  box-shadow: inset 0 0 0 1px rgba(155, 155, 161, 0.5);
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  line-height: 25px;
-  text-align: center;
-  font-size: 14px;
-  vertical-align: middle;
-  letter-spacing: -0.1em;
-} */
+
 .q-title-number--list {
   margin-bottom: 7px;
   margin-top: 1px;
@@ -280,7 +119,6 @@
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  /* margin-bottom: 24px; */
   padding: 0 0 16px 0px!important;
   transform: scale(1,0.85);
   will-change: transform;
@@ -310,16 +148,12 @@
   border: 0;
   line-height: 1.25;
   border-bottom: 2px solid #ddd;
-  /* background: #fff; */
   padding: 10px 0 4px 0;
   color: #000;
   font-size: 19px;
   width: 100%;
   text-align: left;
   transition: 0.2s;
-
-
-  /* justify-content: space-between; */
   align-items: flex;
 }
 
@@ -329,14 +163,6 @@
   display: block;
 }
 
-/* .q-statistics {
-  font-size: 80%;
-  color: #bbb;
-  font-weight: 400;
-}
-.q-true .q-statistics {
-  color: var(--green);
-} */
 
 .q-true .q-statistics {
   background: var(--green);
@@ -352,7 +178,6 @@
 }
 
 .q-button:hover {
-  /* color: var(--green); */
   border-bottom-color: #000;
   cursor: pointer;
 }
@@ -369,13 +194,10 @@
   transition: 0.15s;
   color: var(--green)!important;
   border-bottom-color: var(--greenLight)!important;
-  /* font-weight: 600; */
 }
 .q-user-select {
   color: #000;
 }
-
-
 
 
 .check-mark {
@@ -402,48 +224,29 @@
   display: block;
   animation: dash 0.2s ease-in forwards;
 }
-.q-user-select .q-button-text {
-  /* font-weight: 600; */
-}
 
 .q-true.q-user-select .check-mark {
   stroke:var(--green);
 }
 
 .q-comment {
-  /* margin-bottom: 16px; */
   display: inline-block;
   position: relative;
-  /* display: inline; */
-  /* background: #faf3de; */
   font-size: 16px;
   color: #000!important;
   font-weight: 400!important;
   padding: 10px 0 10px;
-  /* margin: 8px 0 0; */
   transform: scale(0.92,1);
-  /* animation: show-comment 0.2s forwards; */
   transform-origin: top left;
   will-change: transform;
-  /* border: 1px solid #ccc; */
   line-height: 1.4;
-  /* background: #f5f5f5; */
-  /* margin-top: 6px; */
-  /* z-index: -1; */
-  /* margin-top: 8px; */
-  /* margin-bottom: -6px;
-  border-radius: 0 5px 5px 5px; */
 }
-/* .q-comment::before {
-  content: "— ";
-} */
+
  .q-comment::before {
   content: none;
   position: absolute;
   left: -1px;
   top: -8px;
-  /* left: -8px;
-  top: -1px; */
   width: 9px;
   height: 20px;
   background: url("data:image/svg+xml,%3Csvg width%3D%229px%22 height%3D%2220px%22 viewBox%3D%220 0 9 20%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A  %3Cg fill%3D%22none%22%3E%0A    %3Cpath fill%3D%22%23fff%22 d%3D%22M1.29%2C0 L9%2C0 L9%2C20 L7%2C20 L7%2C17.411 C7%2C14.298 6.413 11.233 5.24 8.218 C4.336 5.893 2.794 3.733 0.614 1.738 L0.614 1.738 C0.207 1.365 0.179 0.732 0.552 0.325 C0.741 0.118 1.009 0 1.29 0 Z%22%3E%3C%2Fpath%3E%0A    %3Cpath stroke%3D%22%23ccc%22 stroke-width%3D%221%22 d%3D%22M9%2C0.5 L1.29%2C0.5 C1.149%2C0.5 1.015 0.559 0.921 0.662 C0.734%2C0.866 0.748 1.182 0.952 1.369 C3.186%2C3.414 4.772 5.637 5.706 8.036 C6.902%2C11.109 7.5 14.235 7.5 17.411 L7.5%2C20%22%3E%3C%2Fpath%3E%0A  %3C%2Fg%3E%0A%3C%2Fsvg%3E%0A") center no-repeat;

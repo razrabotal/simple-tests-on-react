@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 import Question from './components/Question';
+import Results from './components/Results';
+
 
 class App extends Component{
 	constructor(props){
 		super(props);
-    this.currentIteration = this.currentIteration.bind(this)
+    this.currentIteration = this.currentIteration.bind(this);
+    this.reload = this.reload.bind(this)
 
 		this.state = { 
-      dataCounter: 1,
-      lol : props.prueba.questions,
-      results: props.prueba.results,
+      questions: props.data.questions,
+
+      dataCounter: 1,    
+      results: props.data.results,
       current: 1,
       points: 0,     
       list: [],
@@ -32,51 +36,59 @@ class App extends Component{
     return array;
   }
   
+  createInitialResults() {
+    let initialResult = [];
+    for(let item of this.state.questions) {
+      var temprray = [];
+      for(let itemitem of item.an) {
+        if(itemitem) {
+          temprray.push(0);
+        }
+      }
+      initialResult.push(temprray.join(","));
+    }
+    initialResult = initialResult.join(";");
+
+    return initialResult;
+  }
+
+  setInitialState(qkey) {
+    let init = this.createInitialResults();
+    
+    this.setState({ 
+      gettedRes: this.parseResultsString( init ) 
+    });
+    
+    fetch(`http://taras.top/svalka/test.php?qkey=${qkey}&result=${init}`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    })
+  }
+
   componentDidMount() {
     this.setState({
-      list: [...this.state.lol]
+      list: [...this.state.questions]
     })
 
-    if(this.props.prueba.qkey) {
-      let qkey = this.props.prueba.qkey;
+    if(this.props.data.qkey) {
+      let qkey = this.props.data.qkey;
+
       fetch(`http://taras.top/svalka/test.php?qkey=${qkey}`)
-      .then(response => response.json())
-      .then(data => { 
-        if(data[0]) {     
-           this.setState({ gettedRes: this.parseResultsString(data[0].result) }) 
+        .then(response => response.json())
+        .then(data => { 
+          if(data[0]) {     
+            this.setState({ gettedRes: this.parseResultsString(data[0].result) }) 
+          } else {
+            this.setInitialState(qkey);
           }
         });
-        
-      let initialResult = [];
-      for(let item of this.state.lol) {
-        var temprray = [];
-        for(let itemitem of item.an) {
-          if(itemitem) {
-            temprray.push(0);
-          }
-        }
-        initialResult.push(temprray.join(","));
-      }
-      initialResult = initialResult.join(";");
-
-      this.setState({ 
-        gettedRes: this.parseResultsString(initialResult) 
-      });
-
-      if(this.state.gettedRes === [] ) {
-        fetch(`http://taras.top/svalka/test.php?qkey=${qkey}&result=${initialResult}`, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          }
-        })
-      }
     }
-
   }
   
-  reload() {
+  reload(dataCounter) {
     this.setState({
       points: 0,
       current: 1,
@@ -112,6 +124,28 @@ class App extends Component{
     }
   }
 
+  wtitingResults(index, statistics) {
+    let gettedRes = this.state.gettedRes;
+    gettedRes[index] = statistics;
+
+    let finalRes = [];
+    for(let item of gettedRes) {
+      finalRes.push(item.join(","));
+    }
+    finalRes = finalRes.join(";");
+
+    if(this.props.data.qkey) {
+      let qkey = this.props.data.qkey;
+      fetch(`http://taras.top/svalka/test.php?qkey=${qkey}&result=${finalRes}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      })
+    }
+  }
+
   currentIteration(e, correct, index, statistics) {
     e.preventDefault();
    
@@ -127,42 +161,18 @@ class App extends Component{
     }
 
     this.voteFinalStep();
-    
-    // this.setState({
-    //   current: this.state.current + 1,
-    //   onVote: false
-    // })  
-    
-    let gettedRes = this.state.gettedRes;
-    gettedRes[index] = statistics;
-
-    let finalRes = [];
-    for(let item of gettedRes) {
-      finalRes.push(item.join(","));
-    }
-    finalRes = finalRes.join(";");
-
-    if(this.props.prueba.qkey) {
-      let qkey = this.props.prueba.qkey;
-      fetch(`http://taras.top/svalka/test.php?qkey=${qkey}&result=${finalRes}`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      })
-    }
+    this.wtitingResults(index, statistics);
   }
   
-  addToList(id) {
-    var element = this.state.lol[id];
+  // addToList(id) {
+  //   var element = this.state.questions[id];
 
-    this.setState({
-        list: [element, ...this.state.list]
-    });
+  //   this.setState({
+  //       list: [element, ...this.state.list]
+  //   });
     
-    console.log(this.state.list);
-  }
+  //   console.log(this.state.list);
+  // }
 
   optionForRenderQuestionsList(current, id, option) {
     switch( this.state.questionListDisplay ) {
@@ -182,7 +192,7 @@ class App extends Component{
                 next2={que} 
                 cur={this.state.current} 
                 iteration={this.currentIteration}
-                length={this.state.lol.length}
+                length={this.state.questions.length}
                 statistics={this.state.gettedRes[index]}
                 questionListDisplay = {this.state.questionListDisplay}
                 // nextQue={this.nextQue}
@@ -191,24 +201,9 @@ class App extends Component{
           return null;
       });
      
-     var showResultText = (() => {
-       if(this.state.results) {
-         for(var i of this.state.results) {
-           if(i.points <= this.state.points) {
-             return i.text;
-           }
-         }
-       }
-       return '';
-     })();
 
-    var calcPercent = Math.round(this.state.points / this.state.lol.length * 100);
-     
-    const maxOffset = 30;
-    var offsetForAnimation = maxOffset - Math.round(maxOffset * calcPercent / 100);
-    var styles = {
-      animation: "circle" + offsetForAnimation + " 2s forwards"
-    };
+
+
 
   var showNext = () => this.state.onVote && (
     <div className="q-next" onClick={this.nextQue}>
@@ -218,10 +213,7 @@ class App extends Component{
     </div>);
 
    
-    var showReload = (this.state.current > this.state.list.length) ? 
-         <div className="q-reload" onClick={e => this.reload(e)}>
-           <svg xmlns="http://www.w3.org/2000/svg" className="reload-icon" viewBox="0 0 8.88 7.57"><path d="M5.09.5A3.28,3.28,0,1,1,2.34,2"/><polyline points="0.19 2.88 2.34 1.99 3.48 3.78"/></svg>
-         </div> : '';
+
     
     // var showCircles = () => { 
     //   let mass = [];
@@ -259,72 +251,28 @@ class App extends Component{
 
     var showTitle = () => (this.state.current === 1 || true) ?
     <div className="q-main-title">
-      <h1 className="q-main-title-h1">{this.props.prueba.title}</h1>
-      <p className="q-main-title-p">{this.props.prueba.descr}</p>
+      <h1 className="q-main-title-h1">{this.props.data.title}</h1>
+      <p className="q-main-title-p">{this.props.data.descr}</p>
     </div> : "";
 
-    var showFinal = (this.state.current === this.state.lol.length+1) ? <div className="q-final">
-    <div className="q-result">
 
-      <div className="q-result-circle">
-        <svg xmlns="http://www.w3.org/2000/svg" className="svg-result svg-result--background" viewBox="0 0 10.55 10.55"><path d="M5.27.5A4.77,4.77,0,1,1,.5,5.27,4.77,4.77,0,0,1,5.27.5"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" style={styles} className="svg-result" viewBox="0 0 10.55 10.55"><path d="M5.27.5A4.77,4.77,0,1,1,.5,5.27,4.77,4.77,0,0,1,5.27.5"/></svg>
-        {/* <svg xmlns="http://www.w3.org/2000/svg" className="svg-result svg-result--background" viewBox="0 0 10.61 10.61"><path d="M5.31.5A4.81,4.81,0,1,1,.5,5.31,4.81,4.81,0,0,1,5.31.5"/></svg>  
-        <svg xmlns="http://www.w3.org/2000/svg" style={styles} className="svg-result" viewBox="0 0 10.61 10.61"><path d="M5.31.5A4.81,4.81,0,1,1,.5,5.31,4.81,4.81,0,0,1,5.31.5"/></svg>
-      */}
-        <div className="q-result-counts">
-          { this.state.points }/{ this.state.lol.length }
-        </div>  
-        <div className="q-result-percent">
-          { calcPercent }%
-      </div> 
-      </div>
-
-            
-      
-      <p className="q-result-text">
-        {showResultText} 
-      </p>
-    </div>
-    <div className="q-reload-icon">{ showReload }</div>
-    </div> : '';
+    const showFinal = (this.state.current === this.state.questions.length + 1) && <Results reload={this.reload} {...this.state}/>;
 
 
 
     return (
       <div>    
-
-        
         { showTitle() }
-
-  
-            { showCircles() }
-
-
-
-            <div className="q-container">
-
-            { showFinal }
-            
-
-            
-
-              <div className="q-question-list">
-                
-               
-                { showList }
-                
-              </div>
-
-              
-          </div>    
-
-             { showNext() }       
-            </div>    
-             
-          
-        
-    );
+        { showCircles() }
+        <div className="q-container">
+          { showFinal }
+          <div className="q-question-list">
+            { showList }
+          </div>
+        </div>    
+        { showNext() }       
+      </div>
+      );
    }
 }
 
