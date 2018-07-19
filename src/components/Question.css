@@ -34,12 +34,7 @@
   position: relative;
   /* margin-top: -10px; */
   /* margin-bottom: 0; */
-  opacity: 0;
-  max-height: 0;
-  padding-bottom: 0;
   /* animation: show-que 0.2s 0.5s ease-out forwards;  */
-  transform-origin: top left;
-  will-change: opacity, max-height;
 }
 /* .q-question > .q-list{ 
   animation: show-que 0.4s ease-out forwards; 
@@ -59,26 +54,20 @@
   animation: none!important; 
   opacity: 1!important;
 } */
-.q-question:first-child {
+.q-question-list-anim {
+  opacity: 0;
+  max-height: 0;
+  padding-bottom: 0;
+  will-change: opacity, max-height;
+  transform-origin: top left;
+}
+.q-question-list-anim:first-child {
   animation: show-tr 0.75s 0.5s ease-out forwards; 
 }
 .q-question:not(:first-child) {
   opacity: 1!important;
   max-height: 100vh!important;
   padding-bottom: 40px!important;
-}
-/* .q-question:nth-child(3) {
-  animation: hide-tr 0.5s ease-out forwards; 
-} */
-@keyframes hide-tr {
-  0% {
-    opacity: 1;
-    padding-bottom: 0px;
-  }
-  100% {
-    opacity: 0;
-    padding-bottom: 40px;
-  }
 }
 @keyframes show-tr {
   0% {
@@ -92,6 +81,42 @@
     padding-bottom: 40px;
   }
 }
+
+.q-question-single-anim {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.q-question-single-anim:first-child {
+  max-height: initial!important;
+  animation: show-single 0.5s ease-out forwards; 
+}
+@keyframes show-single {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* .q-question:nth-child(3) {
+  animation: hide-tr 0.5s ease-out forwards; 
+} */
+@keyframes hide-tr {
+  0% {
+    opacity: 1;
+    padding-bottom: 0px;
+  }
+  100% {
+    opacity: 0;
+    padding-bottom: 40px;
+  }
+}
+
+
 
 @keyframes an-que {
   0% {
@@ -256,7 +281,7 @@
   display: flex;
   flex-direction: column;
   /* margin-bottom: 24px; */
-  padding: 0 0 16px 24px!important;
+  padding: 0 0 16px 0px!important;
   transform: scale(1,0.85);
   will-change: transform;
   transform-origin: center top;
@@ -394,7 +419,7 @@
   font-size: 16px;
   color: #000!important;
   font-weight: 400!important;
-  padding: 10px 16px 10px;
+  padding: 10px 0 10px;
   /* margin: 8px 0 0; */
   transform: scale(0.92,1);
   /* animation: show-comment 0.2s forwards; */

@@ -1,3 +1,7 @@
+:root {
+  --border-color: #ddd;
+}
+
 #q-simple {
   font-family: Verdana;
   max-width: 1000px;
@@ -123,9 +127,15 @@
 .q-next {
   position: relative;
   animation: next-show 1s forwards;
-  padding: 50px 100% 100px 30px;
+  padding: 40px 20px 20px 0px;
 }
-.q-next span{
+.q-next__button {
+  display: inline-block;
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  padding: 25px 40px;
+}
+.q-next__arrow{
   position: relative;
   display: block;
   height: 4px;
@@ -133,13 +143,14 @@
   background: currentColor;
   width: 50px;
   transition: 0.2s;
-  animation: next-animate 2s linear infinite;
+  animation: next-animate 3s linear infinite;
   transform-origin: left center;
 }
-.q-next:hover span{
+.q-next:hover .q-next__arrow{
   color: #000;
   width: 70px;
   cursor: pointer;
+  animation-duration: 1s;
 }
 @keyframes next-show {
   0% {
@@ -156,8 +167,11 @@
   0% {
     transform: scale(1,1)
   }
-  50% {
-    transform: scale(0.8,1)
+  25% {
+    transform: scale(0.9,1)
+  }
+  75% {
+    transform: scale(1.1,1)
   }
   100% {
     transform: scale(1,1)
@@ -177,7 +191,7 @@
   border-radius: 50%;
   transition: 0.2s;
 } */
-.q-next span:after {
+.q-next__arrow:after {
   content: '';
   position: absolute;
   right: 1px;

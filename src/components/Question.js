@@ -41,7 +41,20 @@ class Question extends React.Component{
 
   }
 
- 
+  nexQuestion() {
+    
+  }
+
+  setQuestionClasses() {
+    let def = "q-question";
+
+    switch( this.props.questionListDisplay ) {
+      case "LIST_REVERSE": return `${def} q-question-list-anim`;
+      case "SINGLE": return `${def} q-question-single-anim`;
+      default: return def;
+    }
+  }
+
   render() {
     var that = this;
     var que = this.state.que;
@@ -98,12 +111,13 @@ class Question extends React.Component{
     var showQuestionText = () => this.state.que.q;
     // var showNumberQuestion = () => <div className="q-title-number">{this.state.que.id}</div>;
 
-    // var showNext = () => (this.state.selected) ? <div className="q-next" onClick={this.props.nextQue}></div> : "";
+    // var showNext = () => (this.state.selected && this.props.showQuestionText === "SINGLE") ? 
+    //         <div className="q-next" onClick={this.props.nextQue}></div> : "";
     
 
     return (
 
-      <div className="q-question">
+      <div className={this.setQuestionClasses()}>
            
 
            <div className="que-container">

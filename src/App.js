@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Question from './components/Question';
 
-
 class App extends Component{
 	constructor(props){
 		super(props);
@@ -18,7 +17,9 @@ class App extends Component{
       showList: [],
       gettedRes: [],
       onVote: false,
-      userAnswers: []
+      userAnswers: [],
+
+      questionListDisplay: "SINGLE"
     };
 
   } 
@@ -31,13 +32,11 @@ class App extends Component{
     return array;
   }
   
-
   componentDidMount() {
     this.setState({
       list: [...this.state.lol]
     })
 
-  
     if(this.props.prueba.qkey) {
       let qkey = this.props.prueba.qkey;
       fetch(`http://taras.top/svalka/test.php?qkey=${qkey}`)
@@ -93,6 +92,26 @@ class App extends Component{
     });
   }
 
+  // This method to Display next question or to Display button with arrow (next) 
+  voteFinalStep() {
+    switch( this.state.questionListDisplay ) {
+      case "LIST_REVERSE": {
+        this.setState({
+          current: this.state.current + 1,
+          onVote: false
+        });
+        break;
+      }
+      case "SINGLE": {
+        this.setState({
+          onVote: true
+        });
+        break;
+      }
+      default: {}
+    }
+  }
+
   currentIteration(e, correct, index, statistics) {
     e.preventDefault();
    
@@ -107,14 +126,12 @@ class App extends Component{
       })
     }
 
-    this.setState({
-      current: this.state.current + 1,
-      onVote: false
-    });
-
+    this.voteFinalStep();
+    
     // this.setState({
-    //   onVote: true
-    // });
+    //   current: this.state.current + 1,
+    //   onVote: false
+    // })  
     
     let gettedRes = this.state.gettedRes;
     gettedRes[index] = statistics;
@@ -147,9 +164,17 @@ class App extends Component{
     console.log(this.state.list);
   }
 
-   render() {
+  optionForRenderQuestionsList(current, id, option) {
+    switch( this.state.questionListDisplay ) {
+      case "LIST_REVERSE": return current >= id;
+      case "SINGLE": return current === id;
+      default: return 0;
+    }
+  }
+
+  render() {
      var showList = this.state.list.slice(0).reverse().map((que,index) => {
-          if(this.state.current >= +que.id) {
+          if(this.optionForRenderQuestionsList(this.state.current, +que.id, this.state.questionListDisplay)) {
              return <Question 
                 key={`${this.state.dataCounter}_${index}`} 
                 index={index}
@@ -159,6 +184,8 @@ class App extends Component{
                 iteration={this.currentIteration}
                 length={this.state.lol.length}
                 statistics={this.state.gettedRes[index]}
+                questionListDisplay = {this.state.questionListDisplay}
+                // nextQue={this.nextQue}
                />;
           }
           return null;
@@ -183,7 +210,12 @@ class App extends Component{
       animation: "circle" + offsetForAnimation + " 2s forwards"
     };
 
-    var showNext = () => (this.state.onVote) ? <div className="q-next" onClick={this.nextQue}><span></span></div> : "";
+  var showNext = () => this.state.onVote && (
+    <div className="q-next" onClick={this.nextQue}>
+      <span className="q-next__button">
+        <span className="q-next__arrow"></span>
+      </span>
+    </div>);
 
    
     var showReload = (this.state.current > this.state.list.length) ? 
