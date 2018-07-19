@@ -1,10 +1,9 @@
 body {
-  margin: 0;
+  margin: 36px 0;
   font-family: Verdana;
-  padding:60px;
 }
 .container-fluid {
-  max-width: 750px;
-  margin: 40px auto 100px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 

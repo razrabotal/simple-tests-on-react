@@ -13,7 +13,9 @@ class Question extends React.Component{
       
       selectItem: '',
       selected: this.props.selected,
-      showPercent: false
+      showPercent: false,
+
+      onVote: false
     };
     
 	}
@@ -60,11 +62,11 @@ class Question extends React.Component{
       }  
     }
 
-    var showComment = (id) => (this.state.selectItem === id && this.state.comment) ? 
-      <div className="q-comment">{this.state.comment}</div> : '';
-
-    // var showComment = () => (this.state.comment) ? 
+    // var showComment = (id) => (this.state.selectItem === id && this.state.comment) ? 
     //   <div className="q-comment">{this.state.comment}</div> : '';
+
+    var showComment = () => (this.state.comment) ? 
+      <div className="q-comment">{this.state.comment}</div> : '';
 
 
     var qList = que.an.map(function(item,index){
@@ -83,32 +85,37 @@ class Question extends React.Component{
             onClick={e => that.onChanged(e, item.comment, item.correct, item.id)}
           >
             <svg className="check-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5.86 6.29"><path d="M.3,3.73,2.67,5.47A17.73,17.73,0,0,1,5.47.31"/></svg>
-            <span className="q-button-text">{item.text} {showComment(item.id)}</span>
+            <span className="q-button-text">{item.text} </span>
             
             <span className="q-statistics" style={ getStatistics(index) }></span>
           </div>
-          
+          {/* {showComment(item.id)} */}
       </li>; 
      })
     
-    var imgRender = (que.img) ? <div className="q-img"><img alt="" src={que.img}/></div> : '';
+    var imgRender = (que.img) ? <div className="que-container-right"><div className="q-img"><img alt="" src={que.img}/></div></div> : '';
       
     var showQuestionText = () => this.state.que.q;
-    var showNumberQuestion = () => <div className="q-title-number">{this.state.que.id}</div>;
+    // var showNumberQuestion = () => <div className="q-title-number">{this.state.que.id}</div>;
 
+    // var showNext = () => (this.state.selected) ? <div className="q-next" onClick={this.props.nextQue}></div> : "";
     
 
     return (
+
       <div className="q-question">
            
-           {imgRender}
-        
+
+           <div className="que-container">
+          
+           <div className="que-container-left">
+
         <div className="q-top">
 
           
 
           <div className="q-title">
-          { showNumberQuestion() }
+          {/* { showNumberQuestion() } */}
             { showQuestionText() }
           </div>   
           {/* <div className="q-number">{this.state.que.id}/{this.props.length}</div> */}
@@ -120,8 +127,21 @@ class Question extends React.Component{
           { qList }
         </div>
         
-        {/* {showComment()} */}
+        {showComment()}
+
+        </div>
+
+           {imgRender}
+        
+          
+           
+      </div>
+
+
+        {/* {showNext()} */}
+
         {/* <div className="q-comment">{this.state.comment}</div> */}
+
       </div>
     );
    }

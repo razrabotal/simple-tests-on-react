@@ -5,10 +5,15 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import parseInner from './parser';
 
+var html = document.getElementById('q-simple').innerHTML;
+document.getElementById('q-simple').innerHTML = "";
+
 ReactDOM.render(
-  <App prueba={parseInner(document.getElementById('q-simple').innerHTML)}/>,
+  <App prueba={parseInner(html)}/>,
   document.getElementById('q-simple')
 );
+
+
 
 registerServiceWorker();
 
