@@ -6,12 +6,12 @@ class Question extends React.Component{
 		super(props);
       
 		this.state = { 
-      que: props.next2,
+      que: props.question,
       site: 'lol',
       comment: '',
       
       selectItem: '',
-      selected: this.props.selected,
+      selected: false,
       showPercent: false,
 
       onVote: false

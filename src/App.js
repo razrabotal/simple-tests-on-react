@@ -17,7 +17,6 @@ class App extends Component{
       results: props.data.results,
       current: 1,
       points: 0,     
-      list: [],
       showList: [],
       gettedRes: [],
       onVote: false,
@@ -39,13 +38,13 @@ class App extends Component{
   createInitialResults() {
     let initialResult = [];
     for(let item of this.state.questions) {
-      var temprray = [];
+      var temparray = [];
       for(let itemitem of item.an) {
         if(itemitem) {
-          temprray.push(0);
+          temparray.push(0);
         }
       }
-      initialResult.push(temprray.join(","));
+      initialResult.push(temparray.join(","));
     }
     initialResult = initialResult.join(";");
 
@@ -69,10 +68,6 @@ class App extends Component{
   }
 
   componentDidMount() {
-    this.setState({
-      list: [...this.state.questions]
-    })
-
     if(this.props.data.qkey) {
       let qkey = this.props.data.qkey;
 
@@ -149,32 +144,18 @@ class App extends Component{
   currentIteration(e, correct, index, statistics) {
     e.preventDefault();
    
-    if(correct) {
-       this.setState({
-        points: this.state.points + 1,
-        userAnswers: [...this.state.userAnswers, 'yes']
-      })
-    } else {
-      this.setState({
-        userAnswers: [...this.state.userAnswers, 'no']
-      })
-    }
+    this.setState((correct) ? {
+      points: this.state.points + 1,
+      userAnswers: [...this.state.userAnswers, 'yes']
+    } : {
+      userAnswers: [...this.state.userAnswers, 'no']
+    });
 
     this.voteFinalStep();
     this.wtitingResults(index, statistics);
   }
   
-  // addToList(id) {
-  //   var element = this.state.questions[id];
-
-  //   this.setState({
-  //       list: [element, ...this.state.list]
-  //   });
-    
-  //   console.log(this.state.list);
-  // }
-
-  optionForRenderQuestionsList(current, id, option) {
+  howRenderList(current, id, option) {
     switch( this.state.questionListDisplay ) {
       case "LIST_REVERSE": return current >= id;
       case "SINGLE": return current === id;
@@ -183,94 +164,60 @@ class App extends Component{
   }
 
   render() {
-     var showList = this.state.list.slice(0).reverse().map((que,index) => {
-          if(this.optionForRenderQuestionsList(this.state.current, +que.id, this.state.questionListDisplay)) {
+     const showList = this.state.questions.slice(0).reverse().map((question,index) => {
+          if(this.howRenderList(this.state.current, +question.id, this.state.questionListDisplay)) {
              return <Question 
                 key={`${this.state.dataCounter}_${index}`} 
                 index={index}
-                selected={false} 
-                next2={que} 
-                cur={this.state.current} 
+                question={question} 
                 iteration={this.currentIteration}
-                length={this.state.questions.length}
-                statistics={this.state.gettedRes[index]}
-                questionListDisplay = {this.state.questionListDisplay}
-                // nextQue={this.nextQue}
                />;
           }
           return null;
       });
      
+    const Next = () => this.state.onVote && (
+      <div className="q-next" onClick={this.nextQue}>
+        <span className="q-next__button">
+          <span className="q-next__arrow"></span>
+        </span>
+      </div>);
 
-
-
-
-  var showNext = () => this.state.onVote && (
-    <div className="q-next" onClick={this.nextQue}>
-      <span className="q-next__button">
-        <span className="q-next__arrow"></span>
-      </span>
-    </div>);
-
-   
-
-    
-    // var showCircles = () => { 
-    //   let mass = [];
-    //   for(let i = 1; i <= this.state.list.length-this.state.current; i++) {
-    //     mass = [...mass, <div className="q-title-number q-title-number--list"></div>];
-    //   } 
-    //   return <div className="q-circles"> { mass } </div>;
-    // };
-
-    var showCircles = () => { 
+    const Circles = () => { 
       let mass = [];
-
-
-
-      for(let i = 0; i <= this.state.list.length - 1; i++) {
-        if(this.state.userAnswers[i] === 'yes') {
-          mass = [...mass, <div className="q-circle-ok"></div>];
-        } else if(this.state.userAnswers[i] === 'no') {
-          mass = [...mass, <div className="q-circle-no"></div>];
-        } else if(this.state.current - 1 === i) {
-          mass = [...mass, <div className="q-circle-current"></div>];
-        }
-        else{
-          mass = [...mass, <div className="q-circle-null"></div>];
-        }
-      } 
+      for( let i of this.state.questions.keys()) {
+        mass.push(
+          (this.state.userAnswers[i] === 'yes') ? 
+            <div className="q-circle-ok"></div> :
+          (this.state.userAnswers[i] === 'no') ? 
+            <div className="q-circle-no"></div> :
+          (this.state.current - 1 === i) ? 
+            <div className="q-circle-current"></div> :
+            <div className="q-circle-null"></div>
+        )
+      }
       return <div className="q-circles"> { mass } </div>;
-
-      // let mass = [];
-      // for(let i = 1; i <= this.state.list.length-this.state.current; i++) {
-      //   mass = [...mass, <div className="q-title-number q-title-number--list"></div>];
-      // } 
-      // return <div className="q-circles"> { mass } </div>;
     };
 
-    var showTitle = () => (this.state.current === 1 || true) ?
-    <div className="q-main-title">
-      <h1 className="q-main-title-h1">{this.props.data.title}</h1>
-      <p className="q-main-title-p">{this.props.data.descr}</p>
-    </div> : "";
+    const Title = () => <div className="q-main-title">
+        <h1 className="q-main-title-h1">{this.props.data.title}</h1>
+        <p className="q-main-title-p">{this.props.data.descr}</p>
+      </div>;
 
-
-    const showFinal = (this.state.current === this.state.questions.length + 1) && <Results reload={this.reload} {...this.state}/>;
-
-
+    const Final = () => (this.state.current === this.state.questions.length + 1) && 
+      <Results reload={this.reload} {...this.state}/>;
 
     return (
       <div>    
-        { showTitle() }
-        { showCircles() }
+        <Title/>
+        <Circles/>
         <div className="q-container">
-          { showFinal }
+          <Final/>
           <div className="q-question-list">
             { showList }
           </div>
         </div>    
-        { showNext() }       
+        <Next/>       
       </div>
       );
    }
