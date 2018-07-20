@@ -1,7 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+// import Title from './App';
 import parseInner from './parser';
+
+
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
+
+import { shallow, render, mount } from 'enzyme';
+global.shallow = shallow;
+global.render = render;
+global.mount = mount; 
+
+it('should render a title', () => { 
+  const wrapper = shallow(
+    <App/>
+  );
+  expect(wrapper).toMatchSnapshot();
+});
 
 it('renders without crashing', () => {
   var div = document.createElement('div');
@@ -16,7 +34,7 @@ it('renders without crashing', () => {
      - Привки - тира уркиау
      + Хай - Да, правильно
      - Хаюшки - ноу
- 
+  
    Как дела?
      - Хорошо
      + не хорошо
