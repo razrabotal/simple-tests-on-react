@@ -6,16 +6,12 @@ class Question extends React.Component{
 		super(props);
       
 		this.state = { 
-      site: 'lol',
       comment: '',
-      
       selectItem: '',
       selected: false,
       showPercent: false,
-
       onVote: false
     };
-    
 	}
   
   onChanged(e, comment, correct, id) {    
@@ -29,7 +25,7 @@ class Question extends React.Component{
 
       // id начинается не с 0
       id = id - 1;
-
+      
       let statistics = this.props.statistics || [];
       statistics[id] = +statistics[id] + 1;   
       this.props.iteration(e, correct, this.props.index, statistics);
@@ -52,7 +48,8 @@ class Question extends React.Component{
      
     const getStatistics = index => {
       const sum = statistics.reduce((a,b) => +a + +b, 0 );
-      return this.state.showPercent ? { "width": Math.round((statistics[index] || 0) / sum * 100) + "%" } : {};
+      return this.state.showPercent ? 
+        { "width": Math.round((statistics[index] || 0) / sum * 100) + "%" } : {};
     }
 
     const Comment = () => (this.state.comment) ? 
@@ -101,39 +98,18 @@ class Question extends React.Component{
         </div>
       </div>);
 
-
     return (
-
       <div className={this.setQuestionClasses()}>
-           
-
-           <div className="que-container">
-          
-           <div className="que-container-left">
-
-        
+        <div className="que-container">
+          <div className="que-container-left">
             <QuestionText/>   
-        
-
-        <div className="q-list">
-          { qList }
+            <div className="q-list">
+              { qList }
+            </div> 
+            <Comment/>
+          </div>        
+          <QueImg/>
         </div>
-        
-        <Comment/>
-      {/* {showComment()} */}
-        </div>
-
-           <QueImg/>
-        
-          
-           
-      </div>
-
-
-        {/* {showNext()} */}
-
-        {/* <div className="q-comment">{this.state.comment}</div> */}
-
       </div>
     );
    }

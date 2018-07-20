@@ -69,7 +69,7 @@
   display: flex;
   flex-direction: row;
 }
-.q-circles > * {
+[class^="q-circle"] {
   margin-right: 6px;
   border-radius: 10px;
   width: 8px;
@@ -151,7 +151,6 @@
     transform: scale(1,1)
   }
 }
-
 
 @media (max-width: 600px) {
   .q-main-title-h1 {

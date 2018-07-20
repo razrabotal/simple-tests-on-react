@@ -22,7 +22,7 @@ class Results extends Component{
 
     const showResultText = (() => {
       if(this.props.results) {
-        for(var i of this.props.results) {
+        for(let i of this.props.results) {
           if(i.points <= this.props.points) {
             return i.text;
           }
@@ -31,13 +31,15 @@ class Results extends Component{
       return '';
     })();
 
-    const showReload = (this.props.current > this.props.questions.length) && 
+    const Reload = () => (this.props.current > this.props.questions.length) ? 
+        <div className="q-reload-icon">
           <div className="q-reload" onClick={ () => this.props.reload() }>
             <svg xmlns="http://www.w3.org/2000/svg" className="reload-icon" viewBox="0 0 8.88 7.57">
               <path d="M5.09.5A3.28,3.28,0,1,1,2.34,2"/>
               <polyline points="0.19 2.88 2.34 1.99 3.48 3.78"/>
             </svg>
-          </div>;
+          </div>
+        </div> : '';
 
     return ( <div className="q-final">
       <div className="q-result">
@@ -62,10 +64,9 @@ class Results extends Component{
           {showResultText} 
         </p>
       </div>
+         
+      <Reload/>
       
-      <div className="q-reload-icon">
-        { showReload }
-      </div>
     </div>
     );
    }

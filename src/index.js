@@ -13,12 +13,4 @@ ReactDOM.render(
   document.getElementById('q-simple')
 );
 
-
-
 registerServiceWorker();
-
-
-
-
-
-

@@ -11,20 +11,21 @@ class App extends Component{
     this.reload = this.reload.bind(this)
 
 		this.state = { 
-      questions: props.data.questions,
-
+      mainInfo: {
+        title: '',
+        desrc: ''
+      },
+      questions: [],
+      questionListDisplay: "SINGLE",
       dataCounter: 1,    
-      results: props.data.results,
+      results: [],
       current: 1,
       points: 0,     
       showList: [],
       gettedRes: [],
       onVote: false,
-      userAnswers: [],
-
-      questionListDisplay: "SINGLE"
+      userAnswers: []    
     };
-
   } 
   
   parseResultsString(str) {  
@@ -38,13 +39,13 @@ class App extends Component{
   createInitialResults() {
     let initialResult = [];
     for(let item of this.state.questions) {
-      var temparray = [];
+      let tempArray = [];
       for(let itemitem of item.an) {
         if(itemitem) {
-          temparray.push(0);
+          tempArray.push(0);
         }
       }
-      initialResult.push(temparray.join(","));
+      initialResult.push(tempArray.join(","));
     }
     initialResult = initialResult.join(";");
 
@@ -68,7 +69,24 @@ class App extends Component{
   }
 
   componentDidMount() {
-    if(this.props.data.qkey) {
+    if(this.props.data) {
+      const data = this.props.data;
+
+      this.setState({
+        questions: (data.hasOwnProperty("questions")) && this.props.data.questions,
+        results: (data.hasOwnProperty("results")) && this.props.data.results,
+        mainInfo: {
+          title: (data.hasOwnProperty("title")) && this.props.data.title,
+          descr: (data.hasOwnProperty("descr")) && this.props.data.descr
+        }
+      })
+
+      this.getResults();
+    }
+  }
+
+  getResults() {
+    if(this.props.data.hasOwnProperty("qkey")) {
       let qkey = this.props.data.qkey;
 
       fetch(`http://taras.top/svalka/test.php?qkey=${qkey}`)
@@ -187,22 +205,23 @@ class App extends Component{
     const Circles = () => { 
       let mass = [];
       for( let i of this.state.questions.keys()) {
-        mass.push(
+        mass.push( <div key={i}> {
           (this.state.userAnswers[i] === 'yes') ? 
             <div className="q-circle-ok"></div> :
           (this.state.userAnswers[i] === 'no') ? 
             <div className="q-circle-no"></div> :
           (this.state.current - 1 === i) ? 
             <div className="q-circle-current"></div> :
-            <div className="q-circle-null"></div>
+            <div className="q-circle-null"></div>}
+          </div>
         )
       }
       return <div className="q-circles"> { mass } </div>;
     };
 
     const Title = () => <div className="q-main-title">
-        <h1 className="q-main-title-h1">{this.props.data.title}</h1>
-        <p className="q-main-title-p">{this.props.data.descr}</p>
+        <h1 className="q-main-title-h1">{this.state.mainInfo.title}</h1>
+        <p className="q-main-title-p">{this.state.mainInfo.descr}</p>
       </div>;
 
     const Final = () => (this.state.current === this.state.questions.length + 1) ? 
