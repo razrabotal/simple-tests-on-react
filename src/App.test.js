@@ -17,7 +17,7 @@ global.mount = mount;
 it('should render a title', () => { 
   const wrapper = shallow(
     <App/>
-  );
+  ); 
   expect(wrapper).toMatchSnapshot();
 });
 
