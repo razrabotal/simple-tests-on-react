@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="q-question"
+>
+  <div
+    className="que-container"
+  >
+    <div
+      className="que-container-left"
+    >
+      <div
+        className="q-top"
+      >
+        <div
+          className="q-title"
+        >
+          Какое главное правило первой помощи?
+        </div>
+      </div>
+      <div
+        className="q-list"
+      >
+        <li
+          className="
+                      q-list-item 
+                      false 
+                      false"
+        >
+          <div
+            className="
+                        q-button 
+                        false"
+            onClick={[Function]}
+          >
+            <svg
+              className="check-mark"
+              viewBox="0 0 5.86 6.29"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M.3,3.73,2.67,5.47A17.73,17.73,0,0,1,5.47.31"
+              />
+            </svg>
+            <span
+              className="q-button-text"
+            >
+              Безопасность спасателя превыше всего
+            </span>
+            <span
+              className="q-statistics"
+              style={Object {}}
+            />
+          </div>
+        </li>
+        <li
+          className="
+                      q-list-item 
+                      false 
+                      false"
+        >
+          <div
+            className="
+                        q-button 
+                        false"
+            onClick={[Function]}
+          >
+            <svg
+              className="check-mark"
+              viewBox="0 0 5.86 6.29"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M.3,3.73,2.67,5.47A17.73,17.73,0,0,1,5.47.31"
+              />
+            </svg>
+            <span
+              className="q-button-text"
+            >
+              Сам погибай, а товарища выручай
+            </span>
+            <span
+              className="q-statistics"
+              style={Object {}}
+            />
+          </div>
+        </li>
+        <li
+          className="
+                      q-list-item 
+                      false 
+                      false"
+        >
+          <div
+            className="
+                        q-button 
+                        false"
+            onClick={[Function]}
+          >
+            <svg
+              className="check-mark"
+              viewBox="0 0 5.86 6.29"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M.3,3.73,2.67,5.47A17.73,17.73,0,0,1,5.47.31"
+              />
+            </svg>
+            <span
+              className="q-button-text"
+            >
+              Не навреди
+            </span>
+            <span
+              className="q-statistics"
+              style={Object {}}
+            />
+          </div>
+        </li>
+      </div>
+      
+    </div>
+    <div
+      className="que-container-right"
+    >
+      <div
+        className="q-img"
+      >
+        <img
+          alt=""
+          src="              https://cdn-images-1.medium.com/max/2000/1*cvlXS1ag-ndn5YujaJUQ2w.png"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
