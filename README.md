@@ -94,4 +94,6 @@ Version | Description
 ------------ | -------------
 0.1 | Add question
 0.2 | Add image for questions, results, questions counter
+0.3 | New design without interface text 
+0.4 | List and Single display mode 
 
