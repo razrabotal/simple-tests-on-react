@@ -87,9 +87,8 @@ What is your name?
 ```
 
 Version 0.4
-<div align="center">
 <kbd>![alt-text](https://taras.top/share/tests/preview.gif)</kbd>
-</div>
+
 
 Version 0.2
 ![alt text](presentation/example.jpg "Example test")
