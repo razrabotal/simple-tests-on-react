@@ -10,7 +10,7 @@ class Question extends React.Component{
       selectItem: '',
       selected: false,
       showPercent: false,
-      onVote: false
+      // onVote: false
     };
 	}
   
@@ -27,8 +27,11 @@ class Question extends React.Component{
       id = id - 1;
       
       let statistics = this.props.statistics || [];
-      statistics[id] = +statistics[id] + 1;   
-      this.props.iteration(e, correct, this.props.index, statistics);
+      statistics[id] = +statistics[id] + 1; 
+      
+      if(this.props.iteration) {
+        this.props.iteration(e, correct, this.props.index, statistics);
+      }   
     }
 
   }
