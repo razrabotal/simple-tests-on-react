@@ -86,7 +86,7 @@ What is your name?
 </div>
 ```
 
-Version 0.4
+Version 0.5
 <p align="center">
   <img style="box-shadow: 0 0 0 1px #ddd;" src="https://taras.top/share/tests/preview.gif"/>
 </p>
