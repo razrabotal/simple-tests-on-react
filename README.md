@@ -102,4 +102,5 @@ Version | Description
 0.2 | Add image for questions, results, questions counter
 0.3 | New design without interface text 
 0.4 | List and Single display mode 
+0.5 | Added statistics
 
